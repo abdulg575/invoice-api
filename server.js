@@ -35,6 +35,6 @@ app.post('/upload', upload.single('invoice'), (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-  console.log(`🚀 Server running at http://localhost:${port}/`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`🚀 Server running at http://0.0.0.0:${port}/`);
 });
