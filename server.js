@@ -26,6 +26,7 @@ app.post('/upload', upload.single('invoice'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'File upload failed.' });
   }
+
   return res.status(200).json({
     message: 'File uploaded successfully!',
     filename: req.file.filename,
@@ -34,11 +35,6 @@ app.post('/upload', upload.single('invoice'), (req, res) => {
 });
 
 // Start the server
-// Start the server
-const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}/`);
-});
-  console.log(`🚀 Server running at http://localhost:${port}`);
 });
