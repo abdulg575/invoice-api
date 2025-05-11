@@ -36,6 +36,9 @@ app.post('/upload', upload.single('invoice'), (req, res) => {
 // Port to run the server
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+// Port to run the server
+const port = process.env.PORT || 3000;
+
+app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running at http://0.0.0.0:${port}/`);
 });
