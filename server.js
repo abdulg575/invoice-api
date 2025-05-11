@@ -1,43 +1,40 @@
 // server.js
 const express = require('express');
-const multer  = require('multer');
-const path    = require('path');
-const fs      = require('fs');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 
-// ─── Multer Storage Setup ──────────────────────────────────────────────────────
+// —– Multer storage setup —–
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, 'uploads');
-    fs.mkdirSync(uploadDir, { recursive: true });
-    cb(null, uploadDir);
+    const uploadPath = path.join(__dirname, 'uploads');
+    fs.mkdirSync(uploadPath, { recursive: true });
+    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, `${uniqueSuffix}-${file.originalname}`);
-  }
+    const suffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, `${suffix}-${file.originalname}`);
+  },
 });
 const upload = multer({ storage });
 
-// ─── File‐Upload Endpoint ───────────────────────────────────────────────────────
+// —– Upload endpoint —–
 app.post('/upload', upload.single('invoice'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'File upload failed.' });
   }
-  res.status(200).json({
+  res.json({
     message: 'File uploaded successfully!',
     filename: req.file.filename,
-    path:     req.file.path
+    path: req.file.path,
   });
 });
 
-// ─── Port Binding for Render ────────────────────────────────────────────────────
-// final (and only) port declaration:
-// ─── Final port declaration ────────────────────────────────────────────────────
+// —– PORT binding & listen —–
 const port = process.env.PORT || 3000;
-
-// ─── Bind & log with template literal ─────────────────────────────────────────
 app.listen(port, '0.0.0.0', () => {
-  console.log(`🚀 Server running at http://0.0.0.0:${port}/`);
+  // this must print the actual number, not the word "PORT"
+  console.log(`🚀 Listening on port ${port}`);
 });
