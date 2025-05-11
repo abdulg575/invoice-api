@@ -33,10 +33,10 @@ app.post('/upload', upload.single('invoice'), (req, res) => {
   });
 });
 
-// ✅ Final port declaration (only once!)
+// Final port declaration (only once!)
 const port = process.env.PORT || 3000;
 
-// ✅ Proper listen setup for Render
+// Proper listen setup for Render
 app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running at http://0.0.0.0:${port}/`);
 });
