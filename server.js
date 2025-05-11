@@ -33,7 +33,7 @@ app.post('/upload', upload.single('invoice'), (req, res) => {
 });
 
 // —– PORT binding & listen —–
-const port = process.env.PORT || 3000;
+const port = process.env.port || 3000;
 app.listen(port, '0.0.0.0', () => {
   // this must print the actual number, not the word "PORT"
   console.log(`🚀 Listening on port ${port}`);
